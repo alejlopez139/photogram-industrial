@@ -24,14 +24,10 @@ class Photo < ApplicationRecord
   has_many :comments
   has_many :likes
   has_many :fans, through: :likes
-
   validates :caption, presence: true
   validates :image, presence: true
 
   scope :past_week, -> { where(created_at: 1.week.ago...) }
   scope :by_likes, -> { order(likes_count: :desc) }
 
-  Photo.past_week
-
-  current_user.discover.by_likes
 end
